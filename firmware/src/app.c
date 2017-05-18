@@ -393,6 +393,9 @@ void APP_Tasks(void) {
                 USB_DEVICE_CDC_Read(USB_DEVICE_CDC_INDEX_0,
                         &appData.readTransferHandle, appData.readBuffer,
                         APP_READ_BUFFER_SIZE);
+                if(readBuffer[0]=='r'){
+                    rCMD=1;
+                }
 
                 if (appData.readTransferHandle == USB_DEVICE_CDC_TRANSFER_HANDLE_INVALID) {
                     appData.state = APP_STATE_ERROR;
