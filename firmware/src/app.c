@@ -52,7 +52,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdio.h>
 #include <xc.h>
 #include "i2c_lib.h"
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -66,7 +65,6 @@ int startTime = 0;
 char rCMD=0;
 int IMUt;
 short data[7];
-
 // *****************************************************************************
 /* Application Data
   Summary:
@@ -334,7 +332,7 @@ void APP_Initialize(void) {
 
     /* Set up the read buffer */
     appData.readBuffer = &readBuffer[0];
-
+    I2C_master_setup();
     startTime = _CP0_GET_COUNT();
 }
 
@@ -423,7 +421,6 @@ void APP_Tasks(void) {
 
 
         case APP_STATE_SCHEDULE_WRITE:
-
             if (APP_StateReset()) {
                 break;
             }
@@ -471,7 +468,7 @@ void APP_Tasks(void) {
                 startTime = _CP0_GET_COUNT();
             }
             break;
-
+           
         case APP_STATE_WAIT_FOR_WRITE_COMPLETE:
 
             if (APP_StateReset()) {
